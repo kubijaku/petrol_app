@@ -7,11 +7,11 @@ page = get(General_URL)
 bs = BeautifulSoup(page.content,features="html.parser")
 
 
-for all_regions in bs.find_all('tbody'):
-    for region in all_regions.find_all('tr'):
+for all_regions in bs.find_all('tbody'):            #seperating whole file to get all regions
+    for region in all_regions.find_all('tr'):       #seperating get all regions for each region
         name = region.find('a',class_='row-link').get_text()
         print(name)
-        #print(region)
+
         all_prices = region.find_all('td', class_='text-center')
         for price in all_prices:
             if (price.find(class_='down')):
@@ -20,8 +20,8 @@ for all_regions in bs.find_all('tbody'):
                 status = "up"
             else:
                 status = ""
-            print(price.get_text().strip(),status)
-        #print(all_prices)
+            print(price.get_text().strip(),status)  #printing price of petrol and it acutal status
+
 
 
 
