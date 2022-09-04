@@ -1,10 +1,9 @@
-import sys
 from tkinter import *
 from PIL import Image, ImageTk, ImageFilter
 from tkinter import ttk
-import sys
-sys.path.insert(0,"..")
-import AppFolder.data_from_website.data as data
+# import sys
+# sys.path.append('/Users/jakubkubicki/PycharmProjects/petrol_app/AppFolder')
+from data_from_website import data
 
 
 def BlurringPhoto(photo):
@@ -27,7 +26,7 @@ root = Tk()
 root.geometry('880x400')
 
 #Opening and Blurring photo
-bg = Image.open(r"/images/myimage.gif")
+bg = Image.open(r"/Users/jakubkubicki/PycharmProjects/petrol_app/AppFolder/images/myimage.gif")
 blurred_bg = BlurringPhoto(bg)
 
 #Creating Base Canvas
@@ -42,12 +41,12 @@ screen_height = root.winfo_screenheight()
 
 #Adding Title
 title_size = min(screen_width,screen_height)/10
-base_canvas.create_text(int(screen_width/2), int(screen_height/10), text="Petrol AppFolder", tags="TITLE", font=('Apple Chancery', int(title_size),'italic'),fill='#FF0000')
+base_canvas.create_text(int(screen_width/2), int(screen_height/10), text="Petrol App", tags="TITLE", font=('Apple Chancery', int(title_size),'italic'),fill='#FF0000')
 
 def Screen_Resizer(e):
     global bg1, resized_bg, blurred_bg
     #Chnaging size of Background
-    bg1 = Image.open("/images/myimage.gif")
+    bg1 = Image.open(r"/Users/jakubkubicki/PycharmProjects/petrol_app/AppFolder/images/myimage.gif")
     resized_bg = bg1.resize((e.width, e.height) , Image.Resampling.LANCZOS) #Resize the image
     blurred_bg = BlurringPhoto(resized_bg)
     base_canvas.create_image(0, 0, anchor="nw", image=blurred_bg)
@@ -55,11 +54,12 @@ def Screen_Resizer(e):
     #Moving text and changning its size
     base_canvas.delete("TITLE")
     title_size = min(e.width, e.height)/10
-    base_canvas.create_text(int(e.width/2), int(e.height/10), text="Petrol AppFolder", tags="TITLE", font=('Apple Chancery', int(title_size), 'italic'), fill='#FF0000')
+    base_canvas.create_text(int(e.width/2), int(e.height/10), text="Petrol App", tags="TITLE", font=('Apple Chancery', int(title_size), 'italic'), fill='#FF0000')
 
     #adding Region table
     RegionTable = RegionTableShow()
-    img = ImageTk.PhotoImage(image=Image.fromarray())
+    img = ImageTk.PhotoImage(image=Image.fromarray(data.ToArray(data.Data.Region_data)))
+    base_canvas.create_image(25, 25, anchor="nw", image=img)
 
 
 
