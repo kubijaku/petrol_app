@@ -14,7 +14,7 @@ class Data:
     ----------
 
     Region_data : dict[Region_Name,Fuel]
-        list conatining name of the region and Fuel
+        list containing name of the region and Fuel
 
     Fuel : dict[Fuel_Type_Name,[int,string]]
         list containing price for the fuel and its status (down or up)
@@ -45,6 +45,24 @@ class Data:
                 # print(price.get_text().strip(),status)  #printing price of petrol and it acutal status
                 Fuel[ Fuel_Type_Names[ index ] ] = [ price.get_text().strip(), status]
             Region_data[ name ] = Fuel
+
+def ToList( RegionData):
+
+    DataArray = []
+    row_iterator = 0
+    for Region in RegionData:
+        DataArray.append([])
+        column_iterator = 0
+        DataArray[row_iterator].append(Region)
+        column_iterator += 1
+        for Fuel_Type_Name in RegionData[Region]:
+            DataArray[row_iterator].append(Fuel_Type_Name)
+            column_iterator += 1
+            for petrol in RegionData[Region][Fuel_Type_Name]:
+                DataArray[row_iterator].append(petrol)
+                column_iterator += 1
+        row_iterator += 1
+    return DataArray
 
 
 
