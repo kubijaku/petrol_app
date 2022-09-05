@@ -44,6 +44,10 @@ screen_height = root.winfo_screenheight()
 title_size = min(screen_width,screen_height)/10
 base_canvas.create_text(int(screen_width/2), int(screen_height/10), text="Petrol App", tags="TITLE", font=('Apple Chancery', int(title_size),'italic'),fill='#FF0000')
 
+label = Label(base_canvas, text="Kuba") # to trash
+label.pack() # to trash
+base_canvas.create_window(100, 100, anchor="nw", window=label) # to trash
+
 def Screen_Resizer(e):
     global bg1, resized_bg, blurred_bg
     #Chnaging size of Background
@@ -63,9 +67,9 @@ def Screen_Resizer(e):
     # new_img = Image.fromarray(data.ToList(data.Data.Region_data), 'RGB')
     # img = ImageTk.PhotoImage(new_img)
     # base_canvas.create_image(25, 25, anchor="nw", image=img)
-    label = Label(base_canvas, text="Kuba")
-    label.pack()
-    base_canvas.create_window(25,25,anchor="nw", window=label)
+    # label = Label(base_canvas, text="Kuba")
+    # label.pack()
+    # base_canvas.create_window(100,100,anchor="nw", window=label)
 
 
 
