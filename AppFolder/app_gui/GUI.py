@@ -31,6 +31,43 @@ def RegionTableShow2(data_array, screen_width, screen_height):
             else:
                 base_canvas.create_text((screen_width/20)*(index+3), (screen_height/22)*(row_index+5), text=element, tags="RegionTable",font=( "Helvetica", int(Text_Size),'italic'))
 
+def OpenEye(screen_width, screen_height):
+    screen_width=max(screen_width,100)
+    screen_height=max(screen_height,100)
+    # eye = ImageTk.PhotoImage(file="/Users/jakubkubicki/PycharmProjects/petrol_app/AppFolder/images/open_eye.png")
+    eye = Image.open(r"/Users/jakubkubicki/PycharmProjects/petrol_app/AppFolder/images/open_eye.gif")
+    resized_eye = eye.resize((int(screen_width / 30), int(screen_height / 25)), Image.Resampling.LANCZOS)  # Resize the image
+    final_eye = ImageTk.PhotoImage(resized_eye)
+    return final_eye
+
+def CloseEye(screen_width, screen_height):
+    # eye = ImageTk.PhotoImage(file="/Users/jakubkubicki/PycharmProjects/petrol_app/AppFolder/images/open_eye.png")
+    eye = Image.open(r"/Users/jakubkubicki/PycharmProjects/petrol_app/AppFolder/images/closed_eye.gif")
+    resized_eye = eye.resize((int(screen_width / 30), int(screen_height / 25)), Image.Resampling.LANCZOS)  # Resize the image
+    final_eye = ImageTk.PhotoImage(resized_eye)
+    return final_eye
+
+
+def Click_CloseEye():
+    base_canvas.delete("OpenEye")
+    # Showing general data
+    screen_width = root.winfo_reqheight()
+    screen_height = root.winfo_reqheight()
+    final_eye = OpenEye(screen_width, screen_height)
+    Eye_Button = Button(base_canvas, image=final_eye, borderwidth=0, width=screen_width / 50, height=screen_height / 50, command=Click_OpenEye)
+    Eye_Button.pack()
+    base_canvas.create_window(0, 0, anchor="nw", window=Eye_Button, tags="CloseEye")
+
+    Region_array = data.ToList(data.Data.Region_data)
+    RegionTableShow2(Region_array,screen_width,screen_height)
+    Eye = "Open"
+
+def Click_OpenEye():
+    base_canvas.delete("CloseEye")
+    # Showing general data
+    Region_array = data.ToList(data.Data.Region_data)
+    RegionTableShow2(Region_array,screen_width,screen_height)
+    Eye = "Open"
 
 
 root = Tk()
@@ -54,11 +91,13 @@ screen_height = root.winfo_screenheight()
 title_size = min(screen_width,screen_height)/10
 base_canvas.create_text(int(screen_width/2), int(screen_height/10), text="Petrol App", tags="TITLE", font=('Apple Chancery', int(title_size),'italic'),fill='#FF0000')
 
+Eye = "Close"
 
-# eye = Image.open(r"/Users/jakubkubicki/PycharmProjects/petrol_app/AppFolder/images/open_eye.png")
-# # Eye_Button = Button(base_canvas, image=eye, borderwidth=0)
-# # Eye_Button.pack()
-# # base_canvas.create_window(0,0,anchor="nw", window=Eye_Button)
+final_eye = OpenEye(screen_width,screen_height)
+Eye_Button = Button(base_canvas, image=final_eye, borderwidth=0, width=screen_width / 50, height=screen_height / 50)
+Eye_Button.pack()
+base_canvas.create_window(0, 0, anchor="nw", window=Eye_Button, tags="OpenEye")
+
 
 #Showing general data
 Region_array = data.ToList(data.Data.Region_data)
@@ -78,10 +117,19 @@ def Screen_Resizer(e):
     title_size = min(e.width, e.height)/10
     base_canvas.create_text(int(e.width/2), int(e.height/10), text="Petrol App", tags="TITLE", font=('Apple Chancery', int(title_size), 'italic'), fill='#FF0000')
 
+
     #Adding Region table
     Region_array = data.ToList(data.Data.Region_data)
     base_canvas.delete("RegionTable")
     RegionTableShow2(Region_array, e.width, e.height)
+
+    #Changing Eye
+    # base_canvas.delete("OpenEye")
+    final_eye = OpenEye(e.width, e.height)
+    Eye_Button = Button(base_canvas, image=final_eye, borderwidth=0, width=e.width / 50, height=e.height / 50)
+    # Eye_Button.pack()
+    # base_canvas.create_window(0, 0, anchor="nw", window=Eye_Button, tags="OpenEye")
+
 
 
 
