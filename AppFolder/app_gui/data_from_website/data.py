@@ -36,6 +36,7 @@ class Data:
             # print(name)
 
             all_prices = region.find_all('td', class_='text-center')
+            Fuel = dict()
             for index, price in enumerate(all_prices):
                 if (price.find(class_='down')):
                     status = "down"
@@ -45,7 +46,7 @@ class Data:
                     status = ""
                 # print(price.get_text().strip(),status)  #printing price of petrol and it acutal status
                 Fuel[ Fuel_Type_Names[ index ] ] = [ price.get_text().strip(), status]
-            Region_data[ name ] = Fuel
+            Region_data[name] = Fuel
 
 def ToList( RegionData):
 
@@ -62,12 +63,13 @@ def ToList( RegionData):
             for petrol in RegionData[Region][Fuel_Type_Name]:
                 DataArray[row_iterator].append(petrol)
                 column_iterator += 1
+                # print(Fuel_Type_Name)
         row_iterator += 1
     DataArray2 = numpy.asarray(DataArray,dtype=numpy.str0)
     return DataArray2
 
-if __name__ == '__main__':
-    print(ToList(Data.Region_data))
+# if __name__ == '__main__':
+    # print(ToList(Data.Region_data))
 
 
 

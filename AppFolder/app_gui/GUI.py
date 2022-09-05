@@ -22,6 +22,16 @@ def RegionTableShow():
         RegionTree.column(Column, width=25, minwidth=20 )
     return RegionTree
 
+def RegionTableShow2(data_array, screen_width, screen_height):
+    Text_Size = int((min(screen_width,screen_height))/33)
+    for row_index, row in enumerate(data_array):
+        for index, element in enumerate(row):
+            if index == 0:
+                base_canvas.create_text((screen_width/20)*(index+2), (screen_height/22)*(row_index+5), text=element, tags="RegionTable",font=( "Helvetica", int(Text_Size),'italic'))
+            else:
+                base_canvas.create_text((screen_width/20)*(index+3), (screen_height/22)*(row_index+5), text=element, tags="RegionTable",font=( "Helvetica", int(Text_Size),'italic'))
+
+
 
 root = Tk()
 root.geometry('880x400')
@@ -44,9 +54,16 @@ screen_height = root.winfo_screenheight()
 title_size = min(screen_width,screen_height)/10
 base_canvas.create_text(int(screen_width/2), int(screen_height/10), text="Petrol App", tags="TITLE", font=('Apple Chancery', int(title_size),'italic'),fill='#FF0000')
 
-label = Label(base_canvas, text="Kuba") # to trash
-label.pack() # to trash
-base_canvas.create_window(100, 100, anchor="nw", window=label) # to trash
+
+# eye = Image.open(r"/Users/jakubkubicki/PycharmProjects/petrol_app/AppFolder/images/open_eye.png")
+# # Eye_Button = Button(base_canvas, image=eye, borderwidth=0)
+# # Eye_Button.pack()
+# # base_canvas.create_window(0,0,anchor="nw", window=Eye_Button)
+
+#Showing general data
+Region_array = data.ToList(data.Data.Region_data)
+RegionTableShow2(Region_array,screen_width,screen_height)
+
 
 def Screen_Resizer(e):
     global bg1, resized_bg, blurred_bg
@@ -61,15 +78,11 @@ def Screen_Resizer(e):
     title_size = min(e.width, e.height)/10
     base_canvas.create_text(int(e.width/2), int(e.height/10), text="Petrol App", tags="TITLE", font=('Apple Chancery', int(title_size), 'italic'), fill='#FF0000')
 
-    #adding Region table
+    #Adding Region table
+    Region_array = data.ToList(data.Data.Region_data)
+    base_canvas.delete("RegionTable")
+    RegionTableShow2(Region_array, e.width, e.height)
 
-    RegionTable = RegionTableShow()
-    # new_img = Image.fromarray(data.ToList(data.Data.Region_data), 'RGB')
-    # img = ImageTk.PhotoImage(new_img)
-    # base_canvas.create_image(25, 25, anchor="nw", image=img)
-    # label = Label(base_canvas, text="Kuba")
-    # label.pack()
-    # base_canvas.create_window(100,100,anchor="nw", window=label)
 
 
 
