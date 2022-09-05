@@ -91,12 +91,11 @@ screen_height = root.winfo_screenheight()
 title_size = min(screen_width,screen_height)/10
 base_canvas.create_text(int(screen_width/2), int(screen_height/10), text="Petrol App", tags="TITLE", font=('Apple Chancery', int(title_size),'italic'),fill='#FF0000')
 
-Eye = "Close"
-
-final_eye = OpenEye(screen_width,screen_height)
-Eye_Button = Button(base_canvas, image=final_eye, borderwidth=0, width=screen_width / 50, height=screen_height / 50)
-Eye_Button.pack()
-base_canvas.create_window(0, 0, anchor="nw", window=Eye_Button, tags="OpenEye")
+#
+# final_eye = OpenEye(screen_width,screen_height)
+# Eye_Button = Button(base_canvas, image=final_eye, borderwidth=0, width=screen_width / 50, height=screen_height / 50)
+# Eye_Button.pack()
+# base_canvas.create_window(0, 0, anchor="nw", window=Eye_Button, tags="OpenEye")
 
 
 #Showing general data
@@ -123,12 +122,12 @@ def Screen_Resizer(e):
     base_canvas.delete("RegionTable")
     RegionTableShow2(Region_array, e.width, e.height)
 
-    #Changing Eye
-    # base_canvas.delete("OpenEye")
-    final_eye = OpenEye(e.width, e.height)
-    Eye_Button = Button(base_canvas, image=final_eye, borderwidth=0, width=e.width / 50, height=e.height / 50)
-    # Eye_Button.pack()
-    # base_canvas.create_window(0, 0, anchor="nw", window=Eye_Button, tags="OpenEye")
+    # #Changing Eye
+    # # base_canvas.delete("OpenEye")
+    # final_eye = OpenEye(e.width, e.height)
+    # Eye_Button = Button(base_canvas, image=final_eye, borderwidth=0, width=e.width / 50, height=e.height / 50)
+    # # Eye_Button.pack()
+    # # base_canvas.create_window(0, 0, anchor="nw", window=Eye_Button, tags="OpenEye")
 
 
 
