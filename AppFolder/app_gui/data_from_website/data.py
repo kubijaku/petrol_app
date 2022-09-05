@@ -1,3 +1,4 @@
+import numpy
 from bs4 import BeautifulSoup
 from requests import get
 
@@ -62,7 +63,11 @@ def ToList( RegionData):
                 DataArray[row_iterator].append(petrol)
                 column_iterator += 1
         row_iterator += 1
-    return DataArray
+    DataArray2 = numpy.asarray(DataArray,dtype=numpy.str0)
+    return DataArray2
+
+if __name__ == '__main__':
+    print(ToList(Data.Region_data))
 
 
 

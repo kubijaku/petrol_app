@@ -1,3 +1,4 @@
+import tkinter
 from tkinter import *
 from PIL import Image, ImageTk, ImageFilter
 from tkinter import ttk
@@ -57,9 +58,16 @@ def Screen_Resizer(e):
     base_canvas.create_text(int(e.width/2), int(e.height/10), text="Petrol App", tags="TITLE", font=('Apple Chancery', int(title_size), 'italic'), fill='#FF0000')
 
     #adding Region table
+
     RegionTable = RegionTableShow()
-    img = ImageTk.PhotoImage(image=Image.fromarray(data.ToArray(data.Data.Region_data)))
-    base_canvas.create_image(25, 25, anchor="nw", image=img)
+    # new_img = Image.fromarray(data.ToList(data.Data.Region_data), 'RGB')
+    # img = ImageTk.PhotoImage(new_img)
+    # base_canvas.create_image(25, 25, anchor="nw", image=img)
+    label = Label(base_canvas, text="Kuba")
+    label.pack()
+    base_canvas.create_window(25,25,anchor="nw", window=label)
+
+
 
 
 
